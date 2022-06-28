@@ -19,7 +19,7 @@ namespace MornHierarchy {
                 DrawTransparentRect(selectionRect,ownColor.BackColor);
                 hasDrawn = true;
             }
-            var mornHiArray = gameObject.GetComponentsInParent<MornHierarchy>();
+            var mornHiArray = gameObject.GetComponentsInParent<MornHierarchy>(true);
             if(mornHiArray == null) return;
             var target = gameObject.transform;
             var depth = 0;
@@ -67,7 +67,7 @@ namespace MornHierarchy {
         private static void DrawLabel(Rect selectionRect,GameObject gameObject) {
             selectionRect.xMin += 18;
             var style = new GUIStyle();
-            style.normal.textColor = GUI.contentColor;
+            style.normal.textColor = gameObject.activeInHierarchy ? GUI.contentColor : Color.gray;
             style.alignment        = TextAnchor.UpperLeft;
             EditorGUI.LabelField(selectionRect,gameObject.name,style);
         }
